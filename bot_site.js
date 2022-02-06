@@ -11,6 +11,12 @@ var T = new Twit({
 });
 
 var server = http.createServer(function (req, res) {  //creating the web server
+    /*
+    Two inputs: err and data(tweet information given the parameters)
+    
+    * gets tweet url
+    * displays tweet through twitter embeded code
+    */
     function outputdata(err, data) {
         var tweets = data.statuses
         
@@ -49,14 +55,13 @@ var server = http.createServer(function (req, res) {  //creating the web server
         res.write(`<button onclick="keywordFunction()">Add</button>`) //button
         res.write(`<p id="search"></p>`)
         
+        
+        //Standard search operators:
+            //watching now - contains both "watching" and "now"
+            //"happy hour" - contains the exact phrase
+            //love or hare - contains either "love" or "hate" (or both)
         //q: parameters for twitter search / count: number of tweets showing up
-
-        //watching now - contains both "watching" and "now"
-        //"happy hour" - contains the exact phrase
-        //love or hare - contains either "love" or "hate" (or both)
         var params = {q: '"strength training" OR football OR sport injury OR yoga', count: 100}
-        //var params = {q: 'football strength training OR sport injury recovery OR yoga sport', count: 25}
-
         //using devloper information
         //'search/tweets': searching twitter tweets
         //params: pre-set parameter given by var params
