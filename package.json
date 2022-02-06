@@ -1,12 +1,19 @@
 {
-  "name": "node2",
+  "name": "mime-db",
   "version": "1.0.0",
-  "description": "",
+  "description": "I am demonstrating npm",
   "main": "bot_site.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bot_site.js"
+    "start": "node bot_site.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "rainbow",
+    "awkward"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "twit": "^2.1.1"
+  }
 }

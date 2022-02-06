@@ -41,7 +41,7 @@ var server = http.createServer(function (req, res) {  //creating the web server
 
         res.write("<body>")
         res.write("<h1>Sports tweet API</h1>")
-        res.write("<h5>Current Filters: workouts, strength training, sport, sport, injury, & yoga</h5>")
+        res.write("<h5>Current Search Filters: strength training, football, sport injury, yoga</h5>")
         res.write("<h5>Insert additonal filters</h5>")
         res.write("</body>")
 
@@ -50,7 +50,12 @@ var server = http.createServer(function (req, res) {  //creating the web server
         res.write(`<p id="search"></p>`)
         
         //q: parameters for twitter search / count: number of tweets showing up
-        var params = {q: 'workouts OR strength and training OR sport and injury OR sport OR sports OR yoga', count: 25}
+
+        //watching now - contains both "watching" and "now"
+        //"happy hour" - contains the exact phrase
+        //love or hare - contains either "love" or "hate" (or both)
+        var params = {q: '"strength training" OR football OR sport injury OR yoga', count: 100}
+        //var params = {q: 'football strength training OR sport injury recovery OR yoga sport', count: 25}
 
         //using devloper information
         //'search/tweets': searching twitter tweets
@@ -65,7 +70,7 @@ var server = http.createServer(function (req, res) {  //creating the web server
 
         res.write("<body>")
         res.write("<h1>Sports Tweet API</h1>")
-        res.write(`<h5>Current Search Filters: workouts, strength training, sport, sport, injury, yoga, & ${req.url.substring(1, req.url.length)}</h5>`)
+        res.write(`<h5>Current Search Filters: strength training, football, sport injury, yoga, & ${req.url.substring(1, req.url.length)}</h5>`)
         res.write("<h5>Add additonal filters</h5>")
         res.write("</body>")
 
@@ -75,12 +80,13 @@ var server = http.createServer(function (req, res) {  //creating the web server
         res.write(`<p id="search"></p>`)
         
         //parameters for twitter search along with user input keyword
-        var params = {q: `workouts OR strength and training OR sport and injury OR sport OR sports OR yoga OR ${req.url}`, count: 25}
+        var params = {q: `${req.url} OR "strength training" OR football OR sport injury OR yoga`, count: 25}
 
         T.get('search/tweets', params, outputdata);
     }
 });
 
-
-server.listen(5000);
+let port = process.env.PORT || 5000;
+server.listen(port);
+//app.listen(port);
 console.log("working...")
